@@ -13,7 +13,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "30vh",
+          marginTop: "40vh",
         }}
       >
         <ScaleLoader color={"#E2DED0"} size={85} />
