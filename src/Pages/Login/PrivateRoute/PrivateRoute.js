@@ -16,7 +16,7 @@ const PrivateRoute = ({ children, ...rest }) => {
           marginTop: "40vh",
         }}
       >
-        <ScaleLoader color={"#E2DED0"} size={85} />
+        <ScaleLoader color={"#a3a3a3"} size={85} />
       </div>
     );
   }

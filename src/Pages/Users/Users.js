@@ -8,10 +8,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ScaleLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 import { UsersPage, UsersTitle } from "../styles/Users.styles";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllUsers();
@@ -31,6 +33,10 @@ const Users = () => {
 
   const openLinkInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const handleUserDetails = (id) => {
+    navigate(`/user/${id}`);
   };
 
   return (
@@ -55,7 +61,12 @@ const Users = () => {
                     key={user.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
+                    <TableCell
+                      onClick={() => handleUserDetails(`${user.id}`)}
+                      component="th"
+                      scope="row"
+                      sx={{ cursor: "pointer" }}
+                    >
                       {user.first_name}
                     </TableCell>
                     <TableCell>{user.last_name}</TableCell>
@@ -81,7 +92,7 @@ const Users = () => {
             marginTop: "40vh",
           }}
         >
-          <ScaleLoader color={"#E2DED0"} size={85} />
+          <ScaleLoader color={"#a3a3a3"} size={85} />
         </div>
       )}
     </>
