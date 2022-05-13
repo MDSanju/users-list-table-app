@@ -7,4 +7,28 @@ export const UsersPage = styled.div`
 export const UsersTitle = styled.h2`
   font-size: 42px;
   font-weight: 500;
+  margin: 0;
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  & input {
+    width: 285px;
+    height: 41px;
+    padding-left: 12px;
+    font-size: 16px;
+    border: 1px solid;
+  }
+`;
+
+export const SearchBtn = styled.button`
+  width: 50px;
+  height: 45.5px;
+  background: transparent;
+  border: 1px solid;
+  cursor: pointer;
 `;

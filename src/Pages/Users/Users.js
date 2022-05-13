@@ -9,11 +9,24 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ScaleLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
-import { UsersPage, UsersTitle } from "../styles/Users.styles";
+import { BsSearch } from "react-icons/bs";
+import { useForm } from "react-hook-form";
+import {
+  SearchBtn,
+  SearchContainer,
+  UsersPage,
+  UsersTitle,
+} from "../styles/Users.styles";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+
+  const { register, handleSubmit, reset } = useForm();
+  const onSearchFieldSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
 
   useEffect(() => {
     getAllUsers();
@@ -44,6 +57,19 @@ const Users = () => {
       {users.length ? (
         <UsersPage>
           <UsersTitle>{users.length} Users</UsersTitle>
+          <form onSubmit={handleSubmit(onSearchFieldSubmit)}>
+            <SearchContainer>
+              <input
+                type="text"
+                {...register("userName")}
+                placeholder="Search by first or last name"
+                required
+              />
+              <SearchBtn type="submit">
+                <BsSearch size={16} />
+              </SearchBtn>
+            </SearchContainer>
+          </form>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ background: "#fafafa" }}>
