@@ -32,3 +32,20 @@ export const SearchBtn = styled.button`
   border: 1px solid;
   cursor: pointer;
 `;
+
+export const SortingIcons = styled.span`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DetailsPage = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 25px;
+`;
+
+export const ArrowNavigate = styled.div`
+  cursor: pointer;
+`;

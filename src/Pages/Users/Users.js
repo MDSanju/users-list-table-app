@@ -10,10 +10,17 @@ import Paper from "@mui/material/Paper";
 import { ScaleLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import {
+  TiArrowSortedDown,
+  TiArrowSortedUp,
+  TiArrowUnsorted,
+} from "react-icons/ti";
+import { CgSortZa, CgSortAz } from "react-icons/cg";
 import { useForm } from "react-hook-form";
 import {
   SearchBtn,
   SearchContainer,
+  SortingIcons,
   UsersPage,
   UsersTitle,
 } from "../styles/Users.styles";
@@ -23,7 +30,7 @@ const Users = () => {
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
-  const onSearchFieldSubmit = (data) => {
+  const onSearchValueSubmit = (data) => {
     console.log(data);
     reset();
   };
@@ -57,7 +64,7 @@ const Users = () => {
       {users.length ? (
         <UsersPage>
           <UsersTitle>{users.length} Users</UsersTitle>
-          <form onSubmit={handleSubmit(onSearchFieldSubmit)}>
+          <form onSubmit={handleSubmit(onSearchValueSubmit)}>
             <SearchContainer>
               <input
                 type="text"
@@ -74,7 +81,13 @@ const Users = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ background: "#fafafa" }}>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: "bold" }}>First Name</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    First Name{" "}
+                    <SortingIcons>
+                      <CgSortZa size={14} />
+                      <CgSortAz size={14} />
+                    </SortingIcons>
+                  </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Last Name</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Age</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Email</TableCell>
