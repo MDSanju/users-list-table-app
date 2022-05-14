@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { ArrowNavigate, DetailsPage, UsersPage } from "../styles/Users.styles";
+import Button from "@mui/material/Button";
+import { ScaleLoader } from "react-spinners";
+import {
+  ArrowNavigate,
+  DetailsPage,
+  DetailsPageTitleHeader,
+  UserDetailsTable,
+  UserFullName,
+  UsersPage,
+} from "../styles/Users.styles";
 
 const UserDetails = () => {
   const { userId } = useParams();
@@ -29,18 +38,77 @@ const UserDetails = () => {
   };
 
   return (
-    <UsersPage>
-      <DetailsPage>
-        <ArrowNavigate onClick={backToAllUsersPage}>
-          <AiOutlineArrowLeft size={30} />
-        </ArrowNavigate>
-        <div>
-          <h2>
-            Details: {user?.first_name} {user?.last_name}
-          </h2>
+    <>
+      {allUsers.length ? (
+        <UsersPage>
+          <DetailsPageTitleHeader>
+            <DetailsPage>
+              <ArrowNavigate onClick={backToAllUsersPage}>
+                <AiOutlineArrowLeft size={30} />
+              </ArrowNavigate>
+              <UserFullName>
+                <h2>
+                  Details: {user?.first_name} {user?.last_name}
+                </h2>
+              </UserFullName>
+            </DetailsPage>
+            <div>
+              <Button variant="outlined">Logout</Button>
+            </div>
+          </DetailsPageTitleHeader>
+          <UserDetailsTable>
+            <p>
+              First Name:{" "}
+              <span style={{ fontWeight: "bold" }}>{user?.first_name}</span>
+            </p>
+            <hr />
+            <p>
+              Last Name:{" "}
+              <span style={{ fontWeight: "bold" }}>{user?.last_name}</span>
+            </p>
+            <hr />
+            <p>
+              Company Name:{" "}
+              <span style={{ fontWeight: "bold" }}>{user?.company_name}</span>
+            </p>
+            <hr />
+            <p>
+              City: <span style={{ fontWeight: "bold" }}>{user?.city}</span>
+            </p>
+            <hr />
+            <p>
+              State: <span style={{ fontWeight: "bold" }}>{user?.state}</span>
+            </p>
+            <hr />
+            <p>
+              Zip: <span style={{ fontWeight: "bold" }}>{user?.zip}</span>
+            </p>
+            <hr />
+            <p>
+              Email: <span style={{ fontWeight: "bold" }}>{user?.email}</span>
+            </p>
+            <hr />
+            <p>
+              Website: <span style={{ fontWeight: "bold" }}>{user?.web}</span>
+            </p>
+            <hr />
+            <p>
+              Age: <span style={{ fontWeight: "bold" }}>{user?.age}</span>
+            </p>
+          </UserDetailsTable>
+        </UsersPage>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "40vh",
+          }}
+        >
+          <ScaleLoader color={"#a3a3a3"} size={85} />
         </div>
-      </DetailsPage>
-    </UsersPage>
+      )}
+    </>
   );
 };
 

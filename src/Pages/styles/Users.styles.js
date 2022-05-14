@@ -42,10 +42,29 @@ export const SortingIcons = styled.span`
 
 export const DetailsPage = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 25px;
+`;
+
+export const DetailsPageTitleHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const ArrowNavigate = styled.div`
   cursor: pointer;
+`;
+
+export const UserFullName = styled.div`
+  margin: 0;
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+  }
+`;
+
+export const UserDetailsTable = styled.div`
+  padding: 64px;
 `;
