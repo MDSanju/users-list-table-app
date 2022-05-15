@@ -17,6 +17,7 @@ import {
 } from "react-icons/ti";
 import { CgSortZa, CgSortAz } from "react-icons/cg";
 import { useForm } from "react-hook-form";
+import Pagination from "@mui/material/Pagination";
 import {
   SearchBtn,
   SearchContainer,
@@ -27,11 +28,25 @@ import {
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [displayUsers, setDisplayUsers] = useState([]);
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
   const onSearchValueSubmit = (data) => {
-    console.log(data);
+    console.log(data.userName);
+    const searchText = data.userName;
+
+    const matchedUsersDataByFirstName = users.filter((filteredUsers) =>
+      filteredUsers?.first_name.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    const matchedUsersDataByLastName = users.filter((filteredUsers) =>
+      filteredUsers?.last_name.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    setDisplayUsers(matchedUsersDataByFirstName);
+    setDisplayUsers(matchedUsersDataByLastName);
+
     reset();
   };
 
@@ -47,6 +62,7 @@ const Users = () => {
       .then((response) => {
         const allUsers = response.data;
         setUsers(allUsers);
+        setDisplayUsers(allUsers);
       })
       .catch((error) => console.error(error));
   };
@@ -61,9 +77,9 @@ const Users = () => {
 
   return (
     <>
-      {users.length ? (
+      {displayUsers.length ? (
         <UsersPage>
-          <UsersTitle>{users.length} Users</UsersTitle>
+          <UsersTitle>{displayUsers.length} Users</UsersTitle>
           <form onSubmit={handleSubmit(onSearchValueSubmit)}>
             <SearchContainer>
               <input
@@ -95,7 +111,7 @@ const Users = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
+                {displayUsers.map((user) => (
                   <TableRow
                     key={user.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -122,6 +138,11 @@ const Users = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <Pagination
+            count={displayUsers.length}
+            variant="outlined"
+            shape="rounded"
+          />
         </UsersPage>
       ) : (
         <div
