@@ -36,16 +36,13 @@ const Users = () => {
     console.log(data.userName);
     const searchText = data.userName;
 
-    const matchedUsersDataByFirstName = users.filter((filteredUsers) =>
-      filteredUsers?.first_name.toLowerCase().includes(searchText.toLowerCase())
+    const matchedUsersData = users.filter((filteredUsers) =>
+      (filteredUsers?.first_name + " " + filteredUsers.last_name)
+        .toLowerCase()
+        .includes(searchText.toLowerCase())
     );
 
-    const matchedUsersDataByLastName = users.filter((filteredUsers) =>
-      filteredUsers?.last_name.toLowerCase().includes(searchText.toLowerCase())
-    );
-
-    setDisplayUsers(matchedUsersDataByFirstName);
-    setDisplayUsers(matchedUsersDataByLastName);
+    setDisplayUsers(matchedUsersData);
 
     reset();
   };
@@ -157,6 +154,6 @@ const Users = () => {
       )}
     </>
   );
-};
+};;
 
 export default Users;
