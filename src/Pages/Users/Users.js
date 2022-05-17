@@ -94,11 +94,24 @@ const Users = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ background: "#fafafa" }}>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: "bold" }}>
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
                     First Name{" "}
                     <SortingIcons>
-                      <CgSortZa size={14} />
-                      <CgSortAz size={14} />
+                      <CgSortZa
+                        size={10}
+                        style={{ cursor: "pointer", color: "#707070" }}
+                      />
+                      <CgSortAz
+                        size={10}
+                        style={{ cursor: "pointer", color: "#707070" }}
+                      />
                     </SortingIcons>
                   </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Last Name</TableCell>
@@ -136,7 +149,7 @@ const Users = () => {
             </Table>
           </TableContainer>
           <Pagination
-            count={displayUsers.length}
+            count={displayUsers.length / 10}
             variant="outlined"
             shape="rounded"
           />
