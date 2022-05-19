@@ -68,3 +68,10 @@ export const UserFullName = styled.div`
 export const UserDetailsTable = styled.div`
   padding: 64px;
 `;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  margin-top: 36px;
+  margin-bottom: 12px;
+`;

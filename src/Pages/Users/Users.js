@@ -10,15 +10,12 @@ import Paper from "@mui/material/Paper";
 import { ScaleLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import {
-  TiArrowSortedDown,
-  TiArrowSortedUp,
-  TiArrowUnsorted,
-} from "react-icons/ti";
 import { CgSortZa, CgSortAz } from "react-icons/cg";
 import { useForm } from "react-hook-form";
 import Pagination from "@mui/material/Pagination";
+import { usePagination } from "../../hooks/usePagination";
 import {
+  PaginationContainer,
   SearchBtn,
   SearchContainer,
   SortingIcons,
@@ -29,15 +26,19 @@ import {
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [displayUsers, setDisplayUsers] = useState([]);
+  const [tableUserName, setTableUserName] = useState(false);
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
   const onSearchValueSubmit = (data) => {
-    console.log(data.userName);
+    if (data.userName) {
+      setTableUserName(true);
+    }
+
     const searchText = data.userName;
 
     const matchedUsersData = users.filter((filteredUsers) =>
-      (filteredUsers?.first_name + " " + filteredUsers.last_name)
+      (filteredUsers?.first_name + " " + filteredUsers?.last_name)
         .toLowerCase()
         .includes(searchText.toLowerCase())
     );
@@ -71,6 +72,14 @@ const Users = () => {
   const handleUserDetails = (id) => {
     navigate(`/user/${id}`);
   };
+
+  const [
+    totalPages,
+    startPageIndex,
+    endPageIndex,
+    currentPageIndex,
+    displayPage,
+  ] = usePagination(10, displayUsers.length);
 
   return (
     <>
@@ -120,39 +129,83 @@ const Users = () => {
                   <TableCell sx={{ fontWeight: "bold" }}>Website</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {displayUsers.map((user) => (
-                  <TableRow
-                    key={user.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell
-                      onClick={() => handleUserDetails(`${user.id}`)}
-                      component="th"
-                      scope="row"
-                      sx={{ cursor: "pointer" }}
+              {!tableUserName ? (
+                <TableBody>
+                  {(() => {
+                    const showUsers = [];
+                    for (let i = startPageIndex; i <= endPageIndex; i++) {
+                      showUsers.push(
+                        <TableRow
+                          key={displayUsers[i].id}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell
+                            onClick={() =>
+                              handleUserDetails(`${displayUsers[i].id}`)
+                            }
+                            component="th"
+                            scope="row"
+                            sx={{ cursor: "pointer" }}
+                          >
+                            {displayUsers[i].first_name}
+                          </TableCell>
+                          <TableCell>{displayUsers[i].last_name}</TableCell>
+                          <TableCell>{displayUsers[i].age}</TableCell>
+                          <TableCell>{displayUsers[i].email}</TableCell>
+                          <TableCell
+                            onClick={() =>
+                              openLinkInNewTab(`${displayUsers[i].web}`)
+                            }
+                            sx={{ cursor: "pointer", color: "#2c99ff" }}
+                          >
+                            {displayUsers[i].web}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    }
+                    return showUsers;
+                  })()}
+                </TableBody>
+              ) : (
+                <TableBody>
+                  {displayUsers.map((user) => (
+                    <TableRow
+                      key={user.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      {user.first_name}
-                    </TableCell>
-                    <TableCell>{user.last_name}</TableCell>
-                    <TableCell>{user.age}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell
-                      onClick={() => openLinkInNewTab(`${user.web}`)}
-                      sx={{ cursor: "pointer", color: "#2c99ff" }}
-                    >
-                      {user.web}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+                      <TableCell
+                        onClick={() => handleUserDetails(`${user.id}`)}
+                        component="th"
+                        scope="row"
+                        sx={{ cursor: "pointer" }}
+                      >
+                        {user.first_name}
+                      </TableCell>
+                      <TableCell>{user.last_name}</TableCell>
+                      <TableCell>{user.age}</TableCell>
+                      <TableCell>{user.email}</TableCell>
+                      <TableCell
+                        onClick={() => openLinkInNewTab(`${user.web}`)}
+                        sx={{ cursor: "pointer", color: "#2c99ff" }}
+                      >
+                        {user.web}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              )}
             </Table>
           </TableContainer>
-          <Pagination
-            count={displayUsers.length / 10}
-            variant="outlined"
-            shape="rounded"
-          />
+          <PaginationContainer>
+            <Pagination
+              count={totalPages}
+              onChange={(event, value) => displayPage(value)}
+              variant="outlined"
+              shape="rounded"
+            />
+          </PaginationContainer>
         </UsersPage>
       ) : (
         <div
@@ -167,6 +220,6 @@ const Users = () => {
       )}
     </>
   );
-};;
+};
 
 export default Users;
