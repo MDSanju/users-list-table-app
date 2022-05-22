@@ -27,6 +27,31 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [displayUsers, setDisplayUsers] = useState([]);
   const [tableUserName, setTableUserName] = useState(false);
+  const [firstNameSortAsc, setFirstNameSortAsc] = useState(false);
+  const [firstNameSortDes, setFirstNameSortDes] = useState(false);
+  const [lastNameSortAsc, setLastNameSortAsc] = useState(false);
+  const [lastNameSortDes, setLastNameSortDes] = useState(false);
+  const [ageSortAsc, setAgeSortAsc] = useState(false);
+  const [ageSortDes, setAgeSortDes] = useState(false);
+  const [emailSortAsc, setEmailSortAsc] = useState(false);
+  const [emailSortDes, setEmailSortDes] = useState(false);
+  const [websiteSortAsc, setWebsiteSortAsc] = useState(false);
+  const [websiteSortDes, setWebsiteSortDes] = useState(false);
+  const [firstNameSortOrder, setFirstNameSortOrder] = useState(true);
+  const [lastNameSortOrder, setLastNameSortOrder] = useState(true);
+  const [ageSortOrder, setAgeSortOrder] = useState(true);
+  const [emailSortOrder, setEmailSortOrder] = useState(true);
+  const [websiteSortOrder, setWebsiteSortOrder] = useState(true);
+  const [firstNameSortColorAsc, setFirstNameSortColorAsc] = useState("#f44336");
+  const [firstNameSortColorDes, setFirstNameSortColorDes] = useState("#707070");
+  const [lastNameSortColorAsc, setLastNameSortColorAsc] = useState("#f44336");
+  const [lastNameSortColorDes, setLastNameSortColorDes] = useState("#707070");
+  const [ageSortColorAsc, setAgeSortColorAsc] = useState("#f44336");
+  const [ageSortColorDes, setAgeSortColorDes] = useState("#707070");
+  const [emailSortColorAsc, setEmailSortColorAsc] = useState("#f44336");
+  const [emailSortColorDes, setEmailSortColorDes] = useState("#707070");
+  const [websiteSortColorAsc, setWebsiteSortColorAsc] = useState("#f44336");
+  const [websiteSortColorDes, setWebsiteSortColorDes] = useState("#707070");
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
@@ -81,6 +106,211 @@ const Users = () => {
     displayPage,
   ] = usePagination(10, displayUsers.length);
 
+  const firstNameSortingAsc = () => {
+    if (firstNameSortOrder) {
+      setFirstNameSortColorAsc("#707070");
+      setFirstNameSortColorDes("#f44336");
+      setFirstNameSortAsc(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.first_name.toLowerCase();
+        let y = b.first_name.toLowerCase();
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
+        return 0;
+      });
+      setFirstNameSortOrder(false);
+    } else {
+      setFirstNameSortOrder(false);
+    }
+  };
+
+  const firstNameSortingDes = () => {
+    if (!firstNameSortOrder) {
+      setFirstNameSortColorAsc("#f44336");
+      setFirstNameSortColorDes("#707070");
+      setFirstNameSortDes(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.first_name.toLowerCase();
+        let y = b.first_name.toLowerCase();
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      });
+      setFirstNameSortOrder(true);
+    } else {
+      setFirstNameSortOrder(true);
+    }
+  };
+
+  const lastNameSortingAsc = () => {
+    if (lastNameSortOrder) {
+      setLastNameSortColorAsc("#707070");
+      setLastNameSortColorDes("#f44336");
+      setLastNameSortAsc(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.last_name.toLowerCase();
+        let y = b.last_name.toLowerCase();
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
+        return 0;
+      });
+      setLastNameSortOrder(false);
+    } else {
+      setLastNameSortOrder(false);
+    }
+  };
+
+  const lastNameSortingDes = () => {
+    if (!lastNameSortOrder) {
+      setLastNameSortColorAsc("#f44336");
+      setLastNameSortColorDes("#707070");
+      setLastNameSortDes(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.last_name.toLowerCase();
+        let y = b.last_name.toLowerCase();
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      });
+      setLastNameSortOrder(true);
+    } else {
+      setLastNameSortOrder(true);
+    }
+  };
+
+  const ageSortingAsc = () => {
+    if (ageSortOrder) {
+      setAgeSortColorAsc("#707070");
+      setAgeSortColorDes("#f44336");
+      setAgeSortAsc(true);
+      displayUsers.sort(function (a, b) {
+        return a.age - b.age;
+      });
+      setAgeSortOrder(false);
+    } else {
+      setAgeSortOrder(false);
+    }
+  };
+
+  const ageSortingDes = () => {
+    if (!ageSortOrder) {
+      setAgeSortColorAsc("#f44336");
+      setAgeSortColorDes("#707070");
+      setAgeSortDes(true);
+      displayUsers.sort(function (a, b) {
+        return b.age - a.age;
+      });
+      setAgeSortOrder(true);
+    } else {
+      setAgeSortOrder(true);
+    }
+  };
+
+  const emailSortingAsc = () => {
+    if (emailSortOrder) {
+      setEmailSortColorAsc("#707070");
+      setEmailSortColorDes("#f44336");
+      setEmailSortAsc(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.email.toLowerCase();
+        let y = b.email.toLowerCase();
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
+        return 0;
+      });
+      setEmailSortOrder(false);
+    } else {
+      setEmailSortOrder(false);
+    }
+  };
+
+  const emailSortingDes = () => {
+    if (!emailSortOrder) {
+      setEmailSortColorAsc("#f44336");
+      setEmailSortColorDes("#707070");
+      setEmailSortDes(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.email.toLowerCase();
+        let y = b.email.toLowerCase();
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      });
+      setEmailSortOrder(true);
+    } else {
+      setEmailSortOrder(true);
+    }
+  };
+
+  const websiteSortingAsc = () => {
+    if (websiteSortOrder) {
+      setWebsiteSortColorAsc("#707070");
+      setWebsiteSortColorDes("#f44336");
+      setWebsiteSortAsc(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.web.toLowerCase();
+        let y = b.web.toLowerCase();
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
+        return 0;
+      });
+      setWebsiteSortOrder(false);
+    } else {
+      setWebsiteSortOrder(false);
+    }
+  };
+
+  const websiteSortingDes = () => {
+    if (!websiteSortOrder) {
+      setWebsiteSortColorAsc("#f44336");
+      setWebsiteSortColorDes("#707070");
+      setWebsiteSortDes(true);
+      displayUsers.sort(function (a, b) {
+        let x = a.web.toLowerCase();
+        let y = b.web.toLowerCase();
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      });
+      setWebsiteSortOrder(true);
+      setWebsiteSortDes(false);
+    } else {
+      setWebsiteSortOrder(true);
+    }
+  };
+
   return (
     <>
       {displayUsers.length ? (
@@ -106,30 +336,177 @@ const Users = () => {
                   <TableCell
                     sx={{
                       fontWeight: "bold",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
                     }}
                   >
-                    First Name{" "}
-                    <SortingIcons>
-                      <CgSortZa
-                        size={10}
-                        style={{ cursor: "pointer", color: "#707070" }}
-                      />
-                      <CgSortAz
-                        size={10}
-                        style={{ cursor: "pointer", color: "#707070" }}
-                      />
-                    </SortingIcons>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      <>First Name </>
+                      <SortingIcons>
+                        <CgSortZa
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: firstNameSortColorAsc,
+                          }}
+                          onClick={firstNameSortingAsc}
+                        />
+                        <CgSortAz
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: firstNameSortColorDes,
+                          }}
+                          onClick={firstNameSortingDes}
+                        />
+                      </SortingIcons>
+                    </div>
                   </TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Last Name</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Age</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Email</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Website</TableCell>
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      <>Last Name </>
+                      <SortingIcons>
+                        <CgSortZa
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: lastNameSortColorAsc,
+                          }}
+                          onClick={lastNameSortingAsc}
+                        />
+                        <CgSortAz
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: lastNameSortColorDes,
+                          }}
+                          onClick={lastNameSortingDes}
+                        />
+                      </SortingIcons>
+                    </div>
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      <>Age </>
+                      <SortingIcons>
+                        <CgSortZa
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: ageSortColorAsc,
+                          }}
+                          onClick={ageSortingAsc}
+                        />
+                        <CgSortAz
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: ageSortColorDes,
+                          }}
+                          onClick={ageSortingDes}
+                        />
+                      </SortingIcons>
+                    </div>
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      <>Email </>
+                      <SortingIcons>
+                        <CgSortZa
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: emailSortColorAsc,
+                          }}
+                          onClick={emailSortingAsc}
+                        />
+                        <CgSortAz
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: emailSortColorDes,
+                          }}
+                          onClick={emailSortingDes}
+                        />
+                      </SortingIcons>
+                    </div>
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      <>Website </>
+                      <SortingIcons>
+                        <CgSortZa
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: websiteSortColorAsc,
+                          }}
+                          onClick={websiteSortingAsc}
+                        />
+                        <CgSortAz
+                          size={10}
+                          style={{
+                            cursor: "pointer",
+                            color: websiteSortColorDes,
+                          }}
+                          onClick={websiteSortingDes}
+                        />
+                      </SortingIcons>
+                    </div>
+                  </TableCell>
                 </TableRow>
               </TableHead>
-              {!tableUserName ? (
+              {!tableUserName &&
+              (!firstNameSortAsc ||
+                !firstNameSortDes ||
+                !lastNameSortAsc ||
+                !lastNameSortDes ||
+                !ageSortAsc ||
+                !ageSortDes ||
+                !emailSortAsc ||
+                !emailSortDes ||
+                !websiteSortAsc ||
+                !websiteSortDes) ? (
                 <TableBody>
                   {(() => {
                     const showUsers = [];
