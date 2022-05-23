@@ -5,10 +5,12 @@ import axios from "axios";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Button from "@mui/material/Button";
 import { ScaleLoader } from "react-spinners";
+import { FiLogOut } from "react-icons/fi";
 import {
   ArrowNavigate,
   DetailsPage,
   DetailsPageTitleHeader,
+  LogoutBtn,
   UserDetailsTable,
   UserFullName,
   UsersPage,
@@ -54,9 +56,15 @@ const UserDetails = () => {
                 </h2>
               </UserFullName>
             </DetailsPage>
-            <div onClick={logout}>
-              <Button variant="outlined">Logout</Button>
-            </div>
+            <LogoutBtn>
+              <Button
+                variant="contained"
+                endIcon={<FiLogOut />}
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            </LogoutBtn>
           </DetailsPageTitleHeader>
           <UserDetailsTable>
             <p>

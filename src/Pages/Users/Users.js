@@ -14,10 +14,15 @@ import { CgSortZa, CgSortAz } from "react-icons/cg";
 import { useForm } from "react-hook-form";
 import Pagination from "@mui/material/Pagination";
 import { usePagination } from "../../hooks/usePagination";
+import { AiOutlineLogin } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import { Button } from "@mui/material";
+import useAuth from "../../hooks/useAuth";
 import {
   PaginationContainer,
   SearchBtn,
   SearchContainer,
+  SearchSection,
   SortingIcons,
   UsersPage,
   UsersTitle,
@@ -53,6 +58,11 @@ const Users = () => {
   const [websiteSortColorAsc, setWebsiteSortColorAsc] = useState("#f44336");
   const [websiteSortColorDes, setWebsiteSortColorDes] = useState("#707070");
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const redirectToLogin = () => {
+    navigate("/login");
+  };
 
   const { register, handleSubmit, reset } = useForm();
   const onSearchValueSubmit = (data) => {
@@ -316,19 +326,40 @@ const Users = () => {
       {displayUsers.length ? (
         <UsersPage>
           <UsersTitle>{displayUsers.length} Users</UsersTitle>
-          <form onSubmit={handleSubmit(onSearchValueSubmit)}>
-            <SearchContainer>
-              <input
-                type="text"
-                {...register("userName")}
-                placeholder="Search by first or last name"
-                required
-              />
-              <SearchBtn type="submit">
-                <BsSearch size={16} />
-              </SearchBtn>
-            </SearchContainer>
-          </form>
+          <SearchSection>
+            <form onSubmit={handleSubmit(onSearchValueSubmit)}>
+              <SearchContainer>
+                <input
+                  type="text"
+                  {...register("userName")}
+                  placeholder="Search by first or last name"
+                  required
+                />
+                <SearchBtn type="submit">
+                  <BsSearch size={16} />
+                </SearchBtn>
+              </SearchContainer>
+            </form>
+            <div>
+              {user.email ? (
+                <Button
+                  variant="contained"
+                  endIcon={<FiLogOut />}
+                  onClick={logout}
+                >
+                  logout
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  endIcon={<AiOutlineLogin />}
+                  onClick={redirectToLogin}
+                >
+                  login
+                </Button>
+              )}
+            </div>
+          </SearchSection>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ background: "#fafafa" }}>

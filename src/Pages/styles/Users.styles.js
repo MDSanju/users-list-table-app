@@ -10,6 +10,17 @@ export const UsersTitle = styled.h2`
   margin: 0;
 `;
 
+export const SearchSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+`;
+
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
@@ -48,8 +59,19 @@ export const DetailsPage = styled.div`
 
 export const DetailsPageTitleHeader = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+  }
+`;
+
+export const LogoutBtn = styled.div`
+  margin-top: 0;
+  @media screen and (max-width: 560px) {
+    margin-top: 36px;
+  }
 `;
 
 export const ArrowNavigate = styled.div`
