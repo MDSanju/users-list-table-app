@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Users Table App for True Value Access LLP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App link: [Users Table App](https://users-list-table-app.web.app/)
 
-## Available Scripts
+## FEATURES:
 
-In the project directory, you can run:
+1. All users data show in a table.
 
-### `npm start`
+2. 10 users data show per page by custom pagination.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Sorting functionality works for all columns in both ascending and descending order (used custom JS .sort()).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. It has a search bar that is built with custom search functionality, and it allows to search using user's first_name or last_name and full name as well.
 
-### `npm test`
+5. Each column shows user's first name, last name, age, website and email.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+6. Click on the first name, it will redirect to the login page, old users should login (email/password method or google auth method) to see details of the particular user.
 
-### `npm run build`
+7. And new users should register to access the user details page (private route).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+8. User details page will show user's all informations (all data from the API object), and click on the back navigate icon to back the users table page and also see a logout button to logout.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+9. Users can logout from this app having logged in.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+10. Click on the website link from the table, it will open with a new browser tab.
 
-### `npm run eject`
+## TECHNOLOGY USED:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+React, Firebase - Authentication(Google and Email-Pass), React Router version-6, Context-API, Custom Hooks, Axios, ES6, React Hook Form, Styled-Components and Material-UI.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Firebase Deploy.
