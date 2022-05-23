@@ -7,11 +7,13 @@ import Checkbox from "@mui/material/Checkbox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineLogin } from "react-icons/ai";
 import { FcGoogle, FcHome } from "react-icons/fc";
+import { ScaleLoader } from "react-spinners";
+import Alert from "@mui/material/Alert";
 import { FormCard, LoginFormImg, LoginPage } from "../../styles/Users.styles";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-  const { googleAuthMethod } = useAuth();
+  const { register, handleSubmit, reset } = useForm();
+  const { loginMethod, googleAuthMethod, isLoading, authError } = useAuth();
   const location = useLocation();
   const redirectUriNavigate = useNavigate();
   const navigate = useNavigate();
@@ -19,7 +21,10 @@ const Login = () => {
   const loginWithGoogle = () => {
     googleAuthMethod(location, redirectUriNavigate);
   };
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    loginMethod(data.email, data.password, location, redirectUriNavigate);
+    reset();
+  };
 
   const backToHome = () => {
     navigate("/");
@@ -55,52 +60,68 @@ const Login = () => {
             />
             <br />
             <br />
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                type="email"
-                id="outlined-textarea"
-                label="Email"
-                placeholder="Example@gmail.com"
-                sx={{ width: "300px" }}
-                {...register("email")}
-                required
-              />
-              <br />
-              <br />
-              <TextField
-                id="outlined-password-input"
-                type="password"
-                label="Password"
-                placeholder="Your Password"
-                sx={{ width: "300px" }}
-                {...register("password")}
-                required
-              />
-              <br />
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <FormControlLabel
-                  value="start"
-                  onClick={timeOutForRedirectToRegPage}
-                  control={<Checkbox />}
-                  label="Are you a new user?"
-                  labelPlacement="start"
+            {!isLoading ? (
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <TextField
+                  type="email"
+                  id="outlined-textarea"
+                  label="Email"
+                  placeholder="Example@gmail.com"
+                  sx={{ width: "300px" }}
+                  {...register("email")}
+                  required
                 />
-              </div>
-              <br />
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                endIcon={<AiOutlineLogin />}
+                <br />
+                <br />
+                <TextField
+                  id="outlined-password-input"
+                  type="password"
+                  label="Password"
+                  placeholder="Your Password"
+                  sx={{ width: "300px" }}
+                  {...register("password")}
+                  required
+                />
+                <br />
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <FormControlLabel
+                    value="start"
+                    onClick={timeOutForRedirectToRegPage}
+                    control={<Checkbox />}
+                    label="Are you a new user?"
+                    labelPlacement="start"
+                  />
+                </div>
+                <br />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  endIcon={<AiOutlineLogin />}
+                >
+                  Login
+                </Button>
+              </form>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
               >
-                Login
-              </Button>
-            </form>
+                <ScaleLoader color={"#a3a3a3"} size={85} />
+              </div>
+            )}
             <br />
             <div>
               <p>------------ OR ------------</p>
             </div>
             <br />
+            {authError && (
+              <Alert severity="error" sx={{ marginBottom: "15px" }}>
+                {authError}
+              </Alert>
+            )}
             <Button
               variant="outlined"
               sx={{ width: "300px" }}
