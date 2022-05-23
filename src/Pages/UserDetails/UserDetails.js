@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Button from "@mui/material/Button";
@@ -17,6 +18,7 @@ const UserDetails = () => {
   const { userId } = useParams();
   const [allUsers, setAllUsers] = useState([]);
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
     axios
@@ -52,7 +54,7 @@ const UserDetails = () => {
                 </h2>
               </UserFullName>
             </DetailsPage>
-            <div>
+            <div onClick={logout}>
               <Button variant="outlined">Logout</Button>
             </div>
           </DetailsPageTitleHeader>

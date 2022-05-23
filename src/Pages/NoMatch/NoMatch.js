@@ -13,7 +13,7 @@ const NoMatch = () => {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <img
           style={{ width: "50%" }}
-          src="https://i.ibb.co/Fhjb1vH/404-1.png"
+          src="https://i.ibb.co/kBZmw38/404-1.png"
           alt=""
         />
       </div>

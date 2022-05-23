@@ -75,3 +75,70 @@ export const PaginationContainer = styled.div`
   margin-top: 36px;
   margin-bottom: 12px;
 `;
+
+export const LoginPage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 85px;
+  margin-bottom: 125px;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
+`;
+
+export const LoginFormImg = styled.img`
+  width: 60%;
+  @media screen and (max-width: 1168px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 900px) {
+    width: 75%;
+  }
+  @media screen and (max-width: 680px) {
+    width: 100%;
+  }
+`;
+
+export const FormCard = styled.div`
+  box-shadow: 0 0 20px 1px rgb(0 0 0 / 10%);
+  z-index: 1000;
+  overflow: hidden;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 2.8rem 2.2rem;
+  @media screen and (max-width: 450px) {
+    padding: 2.5rem 0;
+  }
+  @media screen and (max-width: 350px) {
+    width: 100%;
+  }
+`;
+
+export const RegistrationPage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 85px;
+  margin-bottom: 125px;
+  @media screen and (max-width: 900px) {
+    flex-direction: column-reverse;
+  }
+`;
+
+export const RegFormCard = styled.div`
+  box-shadow: 0 0 20px 1px rgb(0 0 0 / 10%);
+  z-index: 1000;
+  overflow: hidden;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 2.8rem 3.8rem;
+  @media screen and (max-width: 450px) {
+    padding: 2.5rem 2rem;
+  }
+  @media screen and (max-width: 350px) {
+    width: 100%;
+  }
+`;
